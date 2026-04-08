@@ -2,7 +2,8 @@ color sweetiepink = #FFB5C6;
 
 
 float sliderx;
-int x = 0;
+float size;
+
 
 void setup () {
   size (600, 600);
@@ -10,16 +11,18 @@ void setup () {
   stroke(sweetiepink);
   fill(sweetiepink);
   sliderx = 300;
-  
+  size = 0;
 }
 
 
 void draw () {
   background(255);
   
+  size = map(sliderx, 100, 700, 20, 150);
+  
   line(100, 300, 500, 300);
-  circle(sliderx, 300, x);
-  x = x + 1;
+  circle(sliderx, 300, size);
+  
   
 }
 
@@ -36,5 +39,6 @@ void mouseReleased() {
 
 void slider () {
   if (mouseX > 100 && mouseX < 500 && mouseY > 275 && mouseY < 325) {
-   sliderx = mouseX;
- }
+    sliderx = mouseX;
+  }
+}

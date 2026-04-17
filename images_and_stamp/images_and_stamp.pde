@@ -8,6 +8,7 @@ boolean heartiev;
 //highlight, tactile, etc.
 color cherrychiffon = #FCDFE5;
 color sweetiepink = #FFB5C6;
+color pinksnow = #FFECF1;
 
 //color pallet
 color red = #FCDCE1;
@@ -25,10 +26,10 @@ color c;
 //slider variables
 float slidery;
 float size;
-
+ 
 
 void setup() {
-  size(700, 700);
+  size(700, 700); //P2D if smoother
   background(255);
   
   //heartie
@@ -46,8 +47,11 @@ void setup() {
 
 void draw() {
   fill(255);
-  strokeWeight(2);
+  noStroke();
+  fill(pinksnow);
+  rect(0, 0, 140, 700);
   
+  strokeWeight(2);
   imageMode(CENTER);
   
   //pusheen button
@@ -66,8 +70,9 @@ void draw() {
   //sizeslider
   stroke(black);
   
-  size = map(slidery, 290, 390, 2, 30);
+  size = map(slidery, 290, 390, 2, 50);
   line(70, 290, 70, 390);
+  fill(white);
   circle(70, slidery, size);
   
   
@@ -110,19 +115,47 @@ void draw() {
   ctactile(75, 245, 40, 25);
   fill(white);
   rect(75, 245, 40, 25);
+  
+  
+  //new, load, save buttons
+  ctactile(75, 245, 40, 25);
+  fill(white);
+  ellipse(70, 603, 70, 25);
+  fill(black);
+  textSize(20);
+  text("new", 53, 610);
+  
+  
+  ctactile(75, 245, 40, 25);
+  fill(white);
+  ellipse(70, 637, 70, 25);
+  fill(black);
+  textSize(20);
+  text("load", 52, 644);
+  
+  
+  ctactile(75, 245, 40, 25);
+  fill(white);
+  ellipse(70, 670, 70, 25);
+  fill(black);
+  textSize(20);
+  text("save", 52, 675); 
+  
+  
 }
 
 
 
 void mouseDragged() {
   if(pusheenvisible) {
-    image(pusheen, mouseX, mouseY, 100, 100);
+    image(pusheen, mouseX, mouseY, size*10, size*10);
   } else if (heartiev) {
-    image(heartie, mouseX, mouseY, 100, 100);
+    image(heartie, mouseX, mouseY, size*10, size*10);
   } else {
     stroke(c);
-    strokeWeight(2);
+    strokeWeight(size);
     line(pmouseX, pmouseY, mouseX, mouseY);
+    
   }
   //sizeslider
   slider();
@@ -145,9 +178,9 @@ void mousePressed() {
   
   //-----just for dots
   if(pusheenvisible) {
-    image(pusheen, mouseX, mouseY, 100, 100);
+    image(pusheen, mouseX, mouseY, size*10, size*10);
   } else if (heartiev) {
-    image(heartie, mouseX, mouseY, 100, 100);
+    image(heartie, mouseX, mouseY, size*10, size*10);
   } else {
     stroke(c);
     strokeWeight(2);
@@ -196,6 +229,16 @@ void mousePressed() {
   if(mouseX > 75 && mouseX < 115 && mouseY > 245 && mouseY < 270) {
     c = white;
   } 
+  
+  //new button
+  if(dist(70, 603, mouseX, mouseY) < ) {
+    c = white;
+  }
+  
+  
+  
+  
+ 
 }
 
 

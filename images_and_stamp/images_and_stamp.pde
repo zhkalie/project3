@@ -118,7 +118,7 @@ void draw() {
   
   
   //new, load, save buttons
-  ctactile(75, 245, 40, 25);
+  btactile(70, 603, 12);
   fill(white);
   ellipse(70, 603, 70, 25);
   fill(black);
@@ -126,7 +126,7 @@ void draw() {
   text("new", 53, 610);
   
   
-  ctactile(75, 245, 40, 25);
+  btactile(70, 637, 12);
   fill(white);
   ellipse(70, 637, 70, 25);
   fill(black);
@@ -134,7 +134,7 @@ void draw() {
   text("load", 52, 644);
   
   
-  ctactile(75, 245, 40, 25);
+  btactile(70, 670, 12);
   fill(white);
   ellipse(70, 670, 70, 25);
   fill(black);
@@ -183,7 +183,7 @@ void mousePressed() {
     image(heartie, mouseX, mouseY, size*10, size*10);
   } else {
     stroke(c);
-    strokeWeight(2);
+    strokeWeight(size );
     line(pmouseX, pmouseY, mouseX, mouseY);
   }
   //---- just for dots
@@ -230,14 +230,20 @@ void mousePressed() {
     c = white;
   } 
   
-  //new button
-  if(dist(70, 603, mouseX, mouseY) < ) {
-    c = white;
+  //new button - 70, 603, 70, 25
+  if(dist(70, 603, mouseX, mouseY) < 12 ) {
+    background(white);
   }
   
+  //load buttonn - 70, 637, 25
+  if(dist(70, 637, mouseX, mouseY) < 12 ) {
+      selectInput("What image do you wanna load??", "OpenImage");
+  }
   
-  
-  
+  //save buttonn - 70, 670, 25
+  if(dist(70, 670, mouseX, mouseY) < 12 ) {
+      selectOutput("What do you want this to be called??", "SaveImage");
+  }
  
 }
 
@@ -260,6 +266,16 @@ void ctactile(int x, int y, int w, int h) {
      stroke(black);
    }
 }
+
+void btactile(int x, int y, int r) {
+   if(dist(x, y, mouseX, mouseY) < r) {
+     stroke(cherrychiffon);
+   } else {
+     stroke(black);
+   }
+}
+
+
 
 void pusheenvisibility () {
     if (pusheenvisible == true) {
@@ -288,5 +304,23 @@ void slider () {
   //70, 290, 70, 415
   if (mouseX > 50 && mouseX < 90 && mouseY > 290 && mouseY < 390) {
     slidery = mouseY;
+  }
+}
+
+void saveImage(File f) {
+  if(f !=null) {
+    PImage canvas = get( 71, 1 , width - 71, height -1);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f) {
+  if(f !=null) {
+    int n = 0;
+    while(n < 100); {
+      PImage pic = loadImage(f.getPath());
+      image(pic, 0, 0);
+      n=n+1;
+    }
   }
 }

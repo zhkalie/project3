@@ -147,6 +147,9 @@ void draw() {
 
 
 void mouseDragged() {
+
+  if (mouseX >140){
+  
   if(pusheenvisible) {
     image(pusheen, mouseX, mouseY, size*10, size*10);
   } else if (heartiev) {
@@ -155,7 +158,7 @@ void mouseDragged() {
     stroke(c);
     strokeWeight(size);
     line(pmouseX, pmouseY, mouseX, mouseY);
-    
+  }
   }
   //sizeslider
   slider();
@@ -164,11 +167,17 @@ void mouseDragged() {
 void mouseReleased () {
   if ( mouseX > 20 && mouseX < 120 && mouseY > 20 && mouseY < 120) {
     pusheenvisible = !pusheenvisible;
+    if(pusheenvisible){
+      heartiev = false;
+    }
   } 
 
   //20, 480, 100, 100
   if ( mouseX > 20 && mouseX < 120 && mouseY > 480 && mouseY < 580) { 
     heartiev = !heartiev;
+    if(heartiev) {
+      pusheenvisible = false;
+    }
   } 
   //sizeslider
   slider();
@@ -176,8 +185,9 @@ void mouseReleased () {
 
 void mousePressed() { 
   
+  if(mouseX >140){
   //-----just for dots
-  if(pusheenvisible) {
+    if(pusheenvisible) {
     image(pusheen, mouseX, mouseY, size*10, size*10);
   } else if (heartiev) {
     image(heartie, mouseX, mouseY, size*10, size*10);
@@ -186,6 +196,7 @@ void mousePressed() {
     strokeWeight(size );
     line(pmouseX, pmouseY, mouseX, mouseY);
   }
+  }
   //---- just for dots
   
   
@@ -193,41 +204,57 @@ void mousePressed() {
   //25, 140, 40, 25
   if(mouseX > 25 && mouseX < 65 && mouseY > 140 && mouseY < 165) {
     c = red;
+    pusheenvisible = false;
+    heartiev = false;
   }
   
   //75, 140, 40, 25
   if(mouseX > 75 && mouseX < 115 && mouseY > 140 && mouseY < 165) {
     c = orange;
+    pusheenvisible = false;
+    heartiev = false;
   }
   
   //25, 175, 40, 25
   if(mouseX > 25 && mouseX < 65 && mouseY > 175 && mouseY < 200) {
     c = yellow;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //75, 175, 40, 25
   if(mouseX > 75 && mouseX < 115 && mouseY > 175 && mouseY < 200) {
     c = green;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //25, 210, 40, 25
   if(mouseX > 25 && mouseX < 65 && mouseY > 210 && mouseY < 235) {
     c = blue;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //75, 210, 40, 25
   if(mouseX > 75 && mouseX < 115 && mouseY > 210 && mouseY < 235) {
     c = purple;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //25, 245, 40, 25
   if(mouseX > 25 && mouseX < 65 && mouseY > 245 && mouseY < 270) {
     c = black;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //75, 245, 40, 25
   if(mouseX > 75 && mouseX < 115 && mouseY > 245 && mouseY < 270) {
     c = white;
+    pusheenvisible = false;
+    heartiev = false;
   } 
   
   //new button - 70, 603, 70, 25
@@ -237,12 +264,12 @@ void mousePressed() {
   
   //load buttonn - 70, 637, 25
   if(dist(70, 637, mouseX, mouseY) < 12 ) {
-      selectInput("What image do you wanna load??", "OpenImage");
+      selectInput("What image do you wanna load??", "openImage");
   }
   
   //save buttonn - 70, 670, 25
   if(dist(70, 670, mouseX, mouseY) < 12 ) {
-      selectOutput("What do you want this to be called??", "SaveImage");
+      selectOutput("What do you want this to be called??", "saveImage");
   }
  
 }
@@ -279,6 +306,7 @@ void btactile(int x, int y, int r) {
 
 void pusheenvisibility () {
     if (pusheenvisible == true) {
+      heartiev = false;
       fill(cherrychiffon);
       stroke(sweetiepink);
       strokeWeight(3);
@@ -291,6 +319,7 @@ void pusheenvisibility () {
 
 void heartiev () {
     if (heartiev == true) {
+      pusheenvisible = false;
       fill(cherrychiffon);
       stroke(sweetiepink);
       strokeWeight(3);
@@ -309,7 +338,8 @@ void slider () {
 
 void saveImage(File f) {
   if(f !=null) {
-    PImage canvas = get( 71, 1 , width - 71, height -1);
+    //  rect(0, 0, 140, 700);
+    PImage canvas = get( 141, 1 , width - 141, height -1);
     canvas.save(f.getAbsolutePath());
   }
 }
@@ -319,7 +349,7 @@ void openImage(File f) {
     int n = 0;
     while(n < 100); {
       PImage pic = loadImage(f.getPath());
-      image(pic, 0, 0);
+      image(pic, 140, 0);
       n=n+1;
     }
   }
